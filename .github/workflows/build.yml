@@ -16,14 +16,11 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
           
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
       - name: Clone Private Dependency
         run: git clone git@github.com:Qingha821/Resource-Syncronization.git
 
       - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v4
+        run: gradle/actions/wrapper-validation@v
         
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -33,11 +30,11 @@ jobs:
           
       - name: Make Gradle Wrapper Executable
         run: chmod +x ./gradlew
+        working-directory: ./Resource-Syncronization
         
       - name: Build
-        run: |
-          cp -r private-repo/src/* src/main/java/
-          ./gradlew build
+        run: ./gradlew build
+        working-directory: ./Resource-Syncronization
           
       - name: Capture Build Artifacts
         uses: actions/upload-artifact@v4
@@ -46,6 +43,7 @@ jobs:
           path: |
             build/libs/*.jar
             !build/libs/*-sources.jar
+          working-directory: ./Resource-Syncronization
             
       - name: Cleanup SSH Keys
         run: rm -f ~/.ssh/id_ed25519
