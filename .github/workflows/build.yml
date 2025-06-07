@@ -38,9 +38,8 @@ jobs:
         with:
           name: Build Artifacts
           path: |
-            build/libs/*.jar
-            !build/libs/*-sources.jar
-          working-directory: ./Resource-Syncronization
+            ./Resource-Syncronization/build/libs/*.jar
+            !./Resource-Syncronization/build/libs/*-sources.jar
             
       - name: Cleanup SSH Keys
         run: rm -f ~/.ssh/id_ed25519
