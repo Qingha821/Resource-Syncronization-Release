@@ -20,7 +20,7 @@ jobs:
         run: git clone git@github.com:Qingha821/Resource-Syncronization.git
 
       - name: Validate Gradle Wrapper
-        run: gradle/actions/wrapper-validation@v
+        run: gradle/actions/wrapper-validation@v4
         
       - name: Setup JDK
         uses: actions/setup-java@v4
